@@ -12,6 +12,7 @@ Hands-on projects built with [Microsoft AutoGen](https://github.com/microsoft/au
 | 3 | [Financial Portfolio Manager](#3-financial-portfolio-manager) | GroupChat with custom `state_transition` for conditional routing (StateFlow) |
 | 4 | [Agentic RAG for eCommerce](#4-agentic-rag-for-ecommerce) | RAG with ChromaDB vector search for product and order retrieval |
 | 5 | [Stock Market Analysis Agent](#5-stock-market-analysis-agent) | Full-stack Streamlit app with finance tools (yfinance, SMA, EMA, RSI) |
+| 6 | [Notion MCP Agent with Autogen](#6-notion-mcp-agent-with-autogen) | MCP integration with Notion API, Flask deployment with ngrok |
 
 ---
 
@@ -82,6 +83,38 @@ streamlit run app.py
 
 ---
 
+### 6. Notion MCP Agent with Autogen
+
+An AI agent that integrates with [Notion](https://www.notion.so/) via the [Model Context Protocol (MCP)](https://developers.notion.com/docs/get-started-with-mcp), enabling natural-language search, summarization, and page creation within a Notion workspace. Includes a Flask API with ngrok tunneling for external access.
+
+| File | Purpose |
+|------|---------|
+| `notion_mcp_agent.py` | Core agent using AutoGen + Notion MCP server (search, summarize, create pages) |
+| `mcp_in_autogen.py` | Introductory MCP example using `McpWorkbench` with a time server |
+| `final.py` | Flask API wrapper exposing the Notion agent via `/run` endpoint with ngrok |
+| `notion-create-page.lua` | Lua script for Notion page creation |
+| `mcp-tool-output.lua` | Lua script for MCP tool output formatting |
+| `Pre-requisite - MCP/` | Prerequisite examples covering basic MCP setup and Gmail MCP integration |
+
+**Run:**
+
+```bash
+cd "6. Notion MCP Agent with Autogen"
+
+# Standalone agent
+python notion_mcp_agent.py
+
+# Flask API with ngrok
+python final.py
+# Then POST to http://localhost:7001/run with {"task": "your task here"}
+```
+
+**Dependencies:** `autogen-agentchat`, `autogen-ext`, `openai`, `flask`, `flask-cors`, `pyngrok`
+
+**Reference:** [MCP with AutoGen: Integrating AI Agents with Notion](https://www.krishnaik.in/project/mcp-with-autogen-integrating-ai-agents-with-notion)
+
+---
+
 ## Technologies
 
 | Category | Technologies |
@@ -90,7 +123,9 @@ streamlit run app.py
 | **LLM Providers** | OpenAI (GPT-4), Groq (Llama 3.3 70B) |
 | **Vector Database** | ChromaDB |
 | **Finance Data** | yfinance |
-| **Web UI** | Streamlit |
+| **Web UI** | Streamlit, Flask |
+| **Protocols** | Model Context Protocol (MCP) |
+| **Tunneling** | ngrok |
 
 ## Prerequisites
 
@@ -113,4 +148,11 @@ jupyter notebook
 # Run Stock Market Streamlit app
 cd "5. Stock Market Analysis Agent"
 streamlit run app.py
+
+# Run Notion MCP Agent (standalone)
+cd "6. Notion MCP Agent with Autogen"
+python notion_mcp_agent.py
+
+# Run Notion MCP Agent (Flask API)
+python final.py
 ```
