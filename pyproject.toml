@@ -71,6 +71,8 @@ dependencies = [
     "langsmith>=0.0.80",
     # Graph database
     "neo4j",
+    # Content conversion
+    "markitdown",
     # Browser automation
     "pyppeteer",
     "crewai",
