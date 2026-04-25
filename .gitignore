@@ -32,3 +32,13 @@ Thumbs.db
 
 # Misc
 *.log
+
+# Vector stores and data
+vectorstores/
+*.db
+chroma_*/
+
+# Claude settings
+.claude/
+*.excalidraw
+diagrams/
